@@ -3,6 +3,9 @@ package com.nelioalves.workshopmongo.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "user") //pode-se colocar o nome que desejar;
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
