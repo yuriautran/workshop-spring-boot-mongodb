@@ -44,4 +44,16 @@ public class UserService {
 		findById(id); //a função está sendo usada para aproveitar a exceção já criada nela;
 		repo.deleteById(id);
 	}
+	
+	public User update(User obj) {
+		Optional<User> optional = repo.findById(obj.getId());
+		User newObj = optional.get();
+		updateData(newObj, obj);
+		return repo.save(newObj);
+	}
+
+	private void updateData(User newObj, User obj) {
+		newObj.setName(obj.getName());
+		newObj.setEmail(obj.getEmail());
+	}
 }
