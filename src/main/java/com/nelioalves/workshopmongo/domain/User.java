@@ -1,8 +1,11 @@
 package com.nelioalves.workshopmongo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user") //pode-se colocar o nome que desejar;
@@ -13,6 +16,9 @@ public class User implements Serializable {
 	private String id;
 	private String name;
 	private String email;
+	
+	@DBRef(lazy=true) //garante que os posts só serão carregados se explicitamente acessar os posts, caso contrário vem apenas os usuários;
+	private List<Post> posts = new ArrayList<>();
 	
 	public User() {
 		
@@ -47,6 +53,15 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override
